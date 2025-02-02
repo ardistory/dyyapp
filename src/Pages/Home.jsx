@@ -8,6 +8,12 @@ import { useContext } from 'react';
 import { GameContext } from '@/components/GameProvider';
 import { ToastAction } from '@/components/ui/toast';
 import Result from '@/partials/Result';
+import { AlertCircle } from "lucide-react";
+import {
+    Alert,
+    AlertDescription,
+    AlertTitle,
+} from "@/components/ui/alert";
 
 export default function Home() {
     const { games, idGame, setIdGame, output, setOutput } = useContext(GameContext);
@@ -48,16 +54,13 @@ export default function Home() {
             </Card>
             <GameSelected />
             {output != 'failed' ? (output.data) && <Result /> : (
-                <Card className={'ring ring-red-500'}>
-                    <CardHeader>
-                        <CardTitle>
-                            Cek Gagal
-                        </CardTitle>
-                        <CardDescription>
-                            Silahkan cek ulang id game anda
-                        </CardDescription>
-                    </CardHeader>
-                </Card>
+                <Alert variant="destructive">
+                    <AlertCircle className="h-4 w-4" />
+                    <AlertTitle>Error</AlertTitle>
+                    <AlertDescription>
+                        Silahkan cek ulang id game anda
+                    </AlertDescription>
+                </Alert>
             )}
         </AppLayout>
     );
